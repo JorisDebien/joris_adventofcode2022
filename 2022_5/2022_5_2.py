@@ -16,11 +16,6 @@ def move_crane(crane_from, crane_to, crane_quantity):
     boxes = current_stack[stack_from][:crane_quantity]
     new_stack = current_stack[stack_from][crane_quantity:]
 
-    print("from", current_stack[stack_from])
-    print(boxes)
-    print(new_stack)
-    print(boxes + current_stack[stack_to])
-
     current_stack[stack_from] = new_stack
     current_stack[stack_to] = boxes + current_stack[stack_to]
 
