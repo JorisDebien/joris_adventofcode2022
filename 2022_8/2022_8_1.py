@@ -7,25 +7,21 @@ with open(r"/Users/jdebien/src/joris_adventofcode2022/2022_8/2022_8_input.txt") 
         array.append(row)
 
 
-# multiple trees of the same height --> index is going crazy because it returns the first item of that height!
-
 for row in array:
-    print("row" + str(array.index(row)))
-    for tree in row:
-        print("Tree" + str(row.index(tree)))
+    for i in range(0, len(row)):
         is_visible = False
-        left_row = row[:row.index(tree)]
-        right_row = row[row.index(tree)+1:]
-        up_column = 0
-        down_column =0
+        left_row = [int(x) for x in row[:i]]
+        right_row = [int(x) for x in row[i+1:]]
+        up_column = [int(row[i]) for row in array[:array.index(row)]]
+        down_column = [int(row[i]) for row in array[array.index(row)+1:]]
 
-        if len(left_row) == 0:
+        if len(left_row) == 0 or max(left_row) < int(row[i]):
             is_visible = True
-        elif max([int(x) for x in left_row]) < int(tree):
+        elif len(right_row) == 0 or max(right_row) < int(row[i]):
             is_visible = True
-        elif len(right_row) == 0:
+        elif len(up_column) == 0 or max(up_column) < int(row[i]):
             is_visible = True
-        elif max([int(x) for x in right_row]) < int(tree):
+        elif len(down_column) == 0 or max(down_column) < int(row[i]):
             is_visible = True
         
         if is_visible:
